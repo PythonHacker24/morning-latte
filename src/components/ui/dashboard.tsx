@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 // Discover Page Component
 function DiscoverPage() {
-  const [subscribing, setSubscribing] = useState(null);
+  const [subscribing, setSubscribing] = useState<number | null>(null);
 
   const topPicks = [
     {
@@ -129,7 +129,7 @@ function DiscoverPage() {
     }
   ];
 
-  const handleSubscribe = async (writerId) => {
+  const handleSubscribe = async (writerId: number) => {
     setSubscribing(writerId);
     // Simulate API call
     setTimeout(() => {
@@ -137,7 +137,28 @@ function DiscoverPage() {
     }, 1500);
   };
 
-  const WriterCard = ({ writer, size = "large" }) => (
+  type Writer = {
+    id: number;
+    name: string;
+    title: string;
+    newsletter: string;
+    bio: string;
+    subscribers: string;
+    avatar: string;
+    tags: string[];
+    social: {
+      twitter?: string;
+      linkedin?: string;
+      website?: string;
+    };
+  };
+
+  type WriterCardProps = {
+    writer: Writer;
+    size?: 'large' | 'small';
+  };
+
+  const WriterCard: React.FC<WriterCardProps> = ({ writer, size = 'large' }) => (
     <div className={`bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex-shrink-0 ${
       size === "large" ? "w-80" : "w-64"
     }`}>
@@ -173,7 +194,7 @@ function DiscoverPage() {
         </div>
         
         <div className="flex flex-wrap gap-1 mb-4">
-          {writer.tags.map((tag, index) => (
+          {writer.tags.map((tag: string, index: number) => (
             <span
               key={index}
               className={`px-2 py-1 bg-gray-100 text-gray-600 rounded-full ${size === "large" ? "text-xs" : "text-xs"}`}
@@ -265,7 +286,13 @@ function Preferences() {
     const [digestTime, setDigestTime] = useState('08:00');
     const [contentLength, setContentLength] = useState('medium');
   
-    const ToggleSwitch = ({ checked, onChange, label, description }) => (
+    type ToggleSwitchProps = {
+      checked: boolean;
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+      label: string;
+      description?: string;
+    };
+    const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ checked, onChange, label, description }) => (
       <div className="flex items-center justify-between py-4 border-b border-gray-100 last:border-b-0">
         <div className="flex-1">
           <div className="flex items-center space-x-3">
@@ -289,7 +316,14 @@ function Preferences() {
       </div>
     );
   
-    const SelectField = ({ label, value, onChange, options, icon: Icon }) => (
+    type SelectFieldProps = {
+      label: string;
+      value: string;
+      onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+      options: { value: string; label: string }[];
+      icon: React.ElementType;
+    };
+    const SelectField: React.FC<SelectFieldProps> = ({ label, value, onChange, options, icon: Icon }) => (
       <div className="py-4 border-b border-gray-100 last:border-b-0">
         <div className="flex items-center space-x-3 mb-2">
           <Icon className="h-5 w-5 text-amber-600" />
@@ -300,7 +334,7 @@ function Preferences() {
           onChange={onChange}
           className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-400 transition-colors bg-white text-gray-800"
         >
-          {options.map((option) => (
+          {options.map((option: { value: string; label: string }) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
@@ -677,7 +711,7 @@ export default function NewsletterFeed() {
             <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
               <div className="max-w-2xl mx-auto px-6 py-4">
                 <div className="flex items-center justify-between">
-                  <h1 className="text-2xl font-serif text-gray-900">Today's Insights Feed</h1>
+                  <h1 className="text-2xl font-serif text-gray-900">Today&apos;s Insights Feed</h1>
                   <div className="flex items-center space-x-4">
                     <span className="text-sm text-gray-500">
                       {newsletters.length} newsletters today
@@ -730,7 +764,7 @@ export default function NewsletterFeed() {
                       </p>
                       
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {newsletter.tags.map((tag, index) => (
+                        {newsletter.tags.map((tag: string, index: number) => (
                           <span
                             key={index}
                             className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"

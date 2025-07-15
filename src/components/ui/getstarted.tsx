@@ -9,7 +9,7 @@ export default function GetStartedPage() {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleEmailSignin = async (e) => {
+  const handleEmailSignin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsLoading(true);
     
@@ -20,7 +20,7 @@ export default function GetStartedPage() {
     }, 1500);
   };
 
-  const handleOAuthSignin = (provider) => {
+  const handleOAuthSignin = (provider: string) => {
     // Placeholder for OAuth integration
     console.log(`Sign in with ${provider}`);
   };
@@ -48,7 +48,7 @@ export default function GetStartedPage() {
                 <Image src="/logo.png" width={80} height={80} alt="logo" className="mx-auto mb-4" />
             </div>
             <h2 className="text-4xl font-serif text-gray-900 mb-4">
-              Let's Make You Smarter
+              Let&apos;s Make You Smarter
             </h2>
             <p className="text-lg text-gray-600 mb-2">
             Commit to Your Newsletters Written by Industry Experts
@@ -130,7 +130,7 @@ export default function GetStartedPage() {
                 </div>
 
                 <p className="text-xs text-gray-500 text-center">
-                  No passwords required. We'll send you a secure link to sign in.
+                  No passwords required. We&apos;ll send you a secure link to sign in.
                 </p>
               </div>
             ) : (
@@ -141,7 +141,7 @@ export default function GetStartedPage() {
                 </div>
                 <h3 className="text-xl font-serif text-gray-900">Check your email</h3>
                 <p className="text-gray-600">
-                  We've sent a magic link to <span className="font-medium text-gray-900">{email}</span>
+                  We&apos;ve sent a magic link to <span className="font-medium text-gray-900">{email}</span>
                 </p>
                 <p className="text-sm text-gray-500">
                   Click the link in your email to sign in. It may take a few minutes to arrive.

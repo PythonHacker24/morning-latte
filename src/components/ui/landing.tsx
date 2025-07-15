@@ -168,7 +168,7 @@ export default function MorningLatteLanding() {
             <h2 className="text-5xl font-serif text-gray-900 mb-6">
               Reclaim your Smart Morning Routine
             </h2>
-            <span className='text-lg font-style: italic text-gray-500'>"Not all readers are leaders, but all leaders are readers." - Harry S. Truman</span>
+            <span className='text-lg font-style: italic text-gray-500'>&quot;Not all readers are leaders, but all leaders are readers.&quot; - Harry S. Truman</span>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
