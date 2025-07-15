@@ -30,7 +30,7 @@ export default function GetStartedPage() {
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-18">
             <div className="flex items-center space-x-3">
             <Image src="/logo.png" width={40} height={40} alt="logo" />
               <span className="text-2xl font-serif text-gray-900">Morning Latte</span>
@@ -51,7 +51,7 @@ export default function GetStartedPage() {
               Let&apos;s Make You Smarter
             </h2>
             <p className="text-lg text-gray-600 mb-2">
-            Commit to Your Newsletters Written by Industry Experts
+            Commit to your newsletters written by industry experts
             </p>
           </div>
 
