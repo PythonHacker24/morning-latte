@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Coffee, Mail, CheckCircle } from 'lucide-react';
+import { Mail, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 
 export default function GetStartedPage() {

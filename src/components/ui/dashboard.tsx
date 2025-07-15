@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Home, Compass, User, ExternalLink, Mail, Heart, Bookmark, Share, Twitter, Linkedin, Users, Moon, Sun, Bell, Globe, Palette, Coffee, Clock, Zap, Shield, Eye } from 'lucide-react';
+import { Home, Compass, User, ExternalLink, Mail, Heart, Bookmark, Share, Twitter, Linkedin, Users, Sun, Bell, Globe, Palette, Coffee, Clock, Zap, Shield, Eye } from 'lucide-react';
 import Image from 'next/image';
 
 // Discover Page Component
@@ -68,64 +68,6 @@ function DiscoverPage() {
         linkedin: "alex-kim-design",
         website: "designsystems.guide"
       }
-    }
-  ];
-
-  const inspiration = [
-    {
-      id: 5,
-      name: "Lisa Park",
-      title: "Wellness Coach",
-      newsletter: "Mindful Mornings",
-      bio: "Daily practices for mental wellness and productivity.",
-      subscribers: "32K",
-      avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=120&h=120&fit=crop&crop=face",
-      tags: ["Wellness", "Mindfulness"],
-      social: { twitter: "@lisapark", website: "mindfulmornings.co" }
-    },
-    {
-      id: 6,
-      name: "David Kumar",
-      title: "Startup Founder",
-      newsletter: "Founder's Journal",
-      bio: "Real stories from the startup trenches.",
-      subscribers: "28K",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face",
-      tags: ["Startups", "Entrepreneurship"],
-      social: { twitter: "@davidkumar", website: "foundersjournal.com" }
-    },
-    {
-      id: 7,
-      name: "Rachel Green",
-      title: "Food Writer",
-      newsletter: "Seasonal Eats",
-      bio: "Sustainable cooking and seasonal recipes.",
-      subscribers: "41K",
-      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&fit=crop&crop=face",
-      tags: ["Food", "Sustainability"],
-      social: { twitter: "@rachelgreen", website: "seasonaleats.com" }
-    },
-    {
-      id: 8,
-      name: "Tom Zhang",
-      title: "Crypto Analyst",
-      newsletter: "Crypto Decoded",
-      bio: "Making sense of the crypto world.",
-      subscribers: "55K",
-      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&h=120&fit=crop&crop=face",
-      tags: ["Crypto", "DeFi"],
-      social: { twitter: "@tomzhang", website: "cryptodecoded.io" }
-    },
-    {
-      id: 9,
-      name: "Maya Patel",
-      title: "Travel Writer",
-      newsletter: "Wanderlust Weekly",
-      bio: "Hidden gems and travel tips from around the world.",
-      subscribers: "38K",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face",
-      tags: ["Travel", "Culture"],
-      social: { twitter: "@mayapatel", website: "wanderlustweekly.com" }
     }
   ];
 
@@ -259,16 +201,6 @@ function DiscoverPage() {
             ))}
           </div>
         </div>
-
-        {/* Get Inspired Section
-        <div>
-          <h2 className="text-xl font-serif text-gray-900 mb-6">Get Inspired by these</h2>
-          <div className="flex space-x-4 overflow-x-auto pb-4">
-            {inspiration.map((writer) => (
-              <WriterCard key={writer.id} writer={writer} size="small" />
-            ))}
-          </div>
-        </div> */}
       </div>
     </div>
   );
