@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import { Mail, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 
+import Navbar from './navbar';
+import Footer from './footer';
+
 export default function GetStartedPage() {
   const [email, setEmail] = useState('');
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -28,16 +31,7 @@ export default function GetStartedPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Navigation */}
-      <nav className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-18">
-            <div className="flex items-center space-x-3">
-            <Image src="/logo.png" width={40} height={40} alt="logo" />
-              <span className="text-2xl font-serif text-gray-900">Morning Latte</span>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -188,6 +182,8 @@ export default function GetStartedPage() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
