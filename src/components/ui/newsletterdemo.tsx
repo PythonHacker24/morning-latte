@@ -37,7 +37,7 @@ const NewsletterDemo = () => {
   );
 
   const transformedNewsletter = (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-8 max-w-md mx-auto border border-blue-100">
+    <div className="bg-gray-50 rounded-xl shadow-lg p-8 max-w-md mx-auto border border-gray-100">
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
