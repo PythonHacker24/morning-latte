@@ -57,7 +57,7 @@ const NewsletterDemo = () => {
         <div className="bg-white rounded-lg p-4 border-l-4 border-blue-500">
           <div className="flex items-center mb-2">
             <TrendingUp className="w-4 h-4 text-blue-600 mr-2" />
-            <span className="font-medium text-gray-800">Key Trend</span>
+            <span className="font-medium font-serif text-gray-800">Key Trend</span>
           </div>
           <p className="text-sm text-gray-700">GPT-5 rumors suggest 100x performance improvement, potentially revolutionizing enterprise AI adoption.</p>
         </div>
@@ -65,7 +65,7 @@ const NewsletterDemo = () => {
         <div className="bg-white rounded-lg p-4 border-l-4 border-green-500">
           <div className="flex items-center mb-2">
             <Lightbulb className="w-4 h-4 text-green-600 mr-2" />
-            <span className="font-medium text-gray-800">Actionable Insight</span>
+            <span className="font-medium font-serif text-gray-800">Actionable Insight</span>
           </div>
           <p className="text-sm text-gray-700">Companies should start preparing AI infrastructure now - early adopters will gain 6-month advantage.</p>
         </div>
@@ -73,7 +73,7 @@ const NewsletterDemo = () => {
         <div className="bg-white rounded-lg p-4 border-l-4 border-purple-500">
           <div className="flex items-center mb-2">
             <Users className="w-4 h-4 text-purple-600 mr-2" />
-            <span className="font-medium text-gray-800">Market Impact</span>
+            <span className="font-medium font-serif text-gray-800">Market Impact</span>
           </div>
           <p className="text-sm text-gray-700">$2.1B in new AI funding this week signals investor confidence in breakthrough technologies.</p>
         </div>
