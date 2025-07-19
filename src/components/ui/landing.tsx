@@ -4,6 +4,7 @@ import React from 'react';
 import { Mail, Clock, ArrowRight, CheckCircle } from 'lucide-react';
 import Navbar from './navbar';
 import Footer from './footer';
+import NewsletterDemo from './newsletterdemo';
 
 export default function MorningLatteLanding() {
 
@@ -138,8 +139,10 @@ export default function MorningLatteLanding() {
         </div>
       </section>
 
+      <NewsletterDemo />
+
       {/* Benefits Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-serif text-gray-900 mb-6">
@@ -150,7 +153,7 @@ export default function MorningLatteLanding() {
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-serif text-gray-900 mb-4">5 min → 30 sec</div>
+              <div className="text-4xl font-serif text-gray-900 mb-4">10+ min → 30 sec</div>
               <h3 className="text-xl font-serif mb-3">Time Saved</h3>
               <p className="text-gray-600">Get the same insights in a fraction of the time</p>
             </div>

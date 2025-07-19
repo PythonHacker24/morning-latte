@@ -181,8 +181,18 @@ function DiscoverPage() {
     </div>
   );
 
+  const featuredWriter = {
+    name: 'The Diary of a CEO Newsletter',
+    author: 'Steven Bartlett',
+    description: 'Insights from conversations with the world\'s most successful people. Business, psychology, and life lessons from a bestselling author and entrepreneur.',
+    subscribers: '450K',
+    backgroundImage: 'steven_bartlett.jpg',
+    backgroundFit: 'cover'
+  };
+
   return (
     <div className="min-h-screen">
+
       {/* Header */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-6 py-4">
@@ -190,6 +200,37 @@ function DiscoverPage() {
           <p className="text-gray-600 mt-1">Find your next favorite newsletter</p>
         </div>
       </div>
+
+        {/* Featured Section */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+            <div 
+              className="relative h-96 md:h-[28rem] lg:h-[26rem] rounded-2xl overflow-hidden shadow-lg"
+              style={{
+                background: `url(${featuredWriter.backgroundImage})`,
+                backgroundSize: featuredWriter.backgroundFit,
+                backgroundPosition: 'center center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            >
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"></div>
+              
+              {/* Content */}
+              <div className="relative h-full flex flex-col justify-end p-8">
+                <div className="mb-4">
+                  <h2 className="text-white font-serif text-xl mb-2">Featured this Week</h2>
+                  <h3 className="text-white font-serif text-3xl mb-3">{featuredWriter.name}</h3>
+                  <p className="text-white/90 font-serif text-lg mb-2">by {featuredWriter.author}</p>
+                  <p className="text-white/80 font-serif text-base max-w-md mb-4">{featuredWriter.description}</p>
+                  <p className="text-gray-50 font-serif text-sm">{featuredWriter.subscribers} subscribers</p>
+                </div>
+                
+                <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-8 rounded-full transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 w-fit">
+                  Join Newsletter
+                </button>
+              </div>
+            </div>
+          </section>
 
       <div className="max-w-6xl mx-auto px-6 py-8">
         {/* Top Picks Section */}
@@ -316,6 +357,7 @@ function Preferences() {
             </div>
             <button className="bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 transition-colors font-medium">Connect</button>
           </div>
+          <div className='font-serif text-gray-500 text-xs'>Relax, we are not interested in your love letters, just Newsletters!</div>
         </div>
   
         {/* Enhanced Preferences */}
@@ -480,97 +522,63 @@ function Preferences() {
             <button type="submit" className="bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 transition-colors font-medium">Submit</button>
           </form>
           <div className="text-sm text-gray-600">
-            Or email us at <a href="mailto:support@morninglatte.com" className="text-amber-600 hover:underline">support@morninglatte.com</a>
+            Or email us at <a href="mailto:support@morninglatte.com" className="text-gray-600 font-bold hover:underline">support@morninglatte.com</a>
           </div>
         </div>
       </div>
     );
   }
 
+// Add types for API response
+interface NewsletterActions {
+  read_full_url: string;
+  liked?: boolean;
+  shared?: boolean;
+  saved?: boolean;
+}
+
+interface NewsletterItem {
+  source: string;
+  time_published: string;
+  read_time_minutes: number;
+  title: string;
+  summary: string;
+  tags: string[];
+  actions: NewsletterActions;
+}
+
+interface FeedResponse {
+  date: string;
+  total_newsletters_today: number;
+  feed: NewsletterItem[];
+}
+
 export default function NewsletterFeed() {
   const [activeTab, setActiveTab] = useState('home');
-  
-  // Sample newsletter data
-  const newsletters = [
-    {
-      id: 1,
-      title: "The AI Revolution: What's Next for 2025",
-      source: "Tech Daily",
-      date: "2025-07-15",
-      timeAgo: "2 hours ago",
-      readTime: "3 min read",
-      summary: "OpenAI announces GPT-5 capabilities, Google's new Gemini updates, and how AI regulation is shaping the industry. Key trends include multimodal AI, enterprise adoption, and the rise of AI-powered productivity tools.",
-      tags: ["AI", "Technology", "Innovation"],
-      isLiked: false,
-      isSaved: false,
-      color: "bg-blue-50 border-blue-200"
-    },
-    {
-      id: 2,
-      title: "Market Moves: Q3 Earnings Preview",
-      source: "Wall Street Insights",
-      date: "2025-07-15",
-      timeAgo: "4 hours ago",
-      readTime: "4 min read",
-      summary: "Major tech companies report mixed results. Apple beats expectations, Tesla faces challenges, and emerging markets show strong growth. Fed signals potential rate adjustments ahead.",
-      tags: ["Finance", "Markets", "Economy"],
-      isLiked: true,
-      isSaved: false,
-      color: "bg-green-50 border-green-200"
-    },
-    {
-      id: 3,
-      title: "Design Systems That Scale",
-      source: "UX Weekly",
-      date: "2025-07-14",
-      timeAgo: "1 day ago",
-      readTime: "5 min read",
-      summary: "Best practices for building design systems that grow with your team. Covers component libraries, design tokens, and collaboration workflows between designers and developers.",
-      tags: ["Design", "UX", "Development"],
-      isLiked: false,
-      isSaved: true,
-      color: "bg-purple-50 border-purple-200"
-    },
-    {
-      id: 4,
-      title: "Climate Tech Breakthrough",
-      source: "Green Tomorrow",
-      date: "2025-07-14",
-      timeAgo: "1 day ago",
-      readTime: "6 min read",
-      summary: "New carbon capture technology promises 90% efficiency. Major funding rounds for clean energy startups and policy updates from the climate summit.",
-      tags: ["Climate", "Technology", "Environment"],
-      isLiked: false,
-      isSaved: false,
-      color: "bg-emerald-50 border-emerald-200"
-    },
-    {
-      id: 5,
-      title: "The Future of Remote Work",
-      source: "Work Evolution",
-      date: "2025-07-13",
-      timeAgo: "2 days ago",
-      readTime: "4 min read",
-      summary: "Companies are rethinking hybrid policies. Latest trends in virtual collaboration, productivity tools, and how teams are adapting to distributed work culture.",
-      tags: ["Remote Work", "Productivity", "Culture"],
-      isLiked: true,
-      isSaved: true,
-      color: "bg-orange-50 border-orange-200"
-    },
-    {
-      id: 6,
-      title: "Crypto Market Analysis",
-      source: "Digital Assets Daily",
-      date: "2025-07-13",
-      timeAgo: "2 days ago",
-      readTime: "3 min read",
-      summary: "Bitcoin stabilizes above $45K, Ethereum 2.0 updates, and new regulatory clarity from major economies. DeFi protocols show increased institutional adoption.",
-      tags: ["Cryptocurrency", "Finance", "Blockchain"],
-      isLiked: false,
-      isSaved: false,
-      color: "bg-yellow-50 border-yellow-200"
-    }
-  ];
+  const [feedData, setFeedData] = useState<FeedResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    setLoading(true);
+    setError(null);
+    fetch('http://localhost:4444/test', { credentials: 'include' })
+      .then(async (res) => {
+        if (res.status === 401 || res.status === 403) {
+          throw new Error('Please log in to view your feed.');
+        }
+        if (!res.ok) throw new Error('Failed to fetch feed');
+        return res.json();
+      })
+      .then((data: FeedResponse) => {
+        setFeedData(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message || 'Unknown error');
+        setLoading(false);
+      });
+  }, []);
 
   const toggleLike = (id: number) => {
     // Toggle like functionality
@@ -646,7 +654,7 @@ export default function NewsletterFeed() {
                   <h1 className="text-2xl font-serif text-gray-900">Today&apos;s Insights Feed</h1>
                   <div className="flex items-center space-x-4">
                     <span className="text-sm text-gray-500">
-                      {newsletters.length} newsletters today
+                      {feedData ? feedData.total_newsletters_today : 0} newsletters today
                     </span>
                     <button className="text-amber-600 hover:text-amber-700">
                       <Mail className="h-5 w-5" />
@@ -658,102 +666,114 @@ export default function NewsletterFeed() {
 
             {/* Feed */}
             <div className="max-w-2xl mx-auto px-6 py-6">
-              <div className="space-y-6">
-                {newsletters.map((newsletter) => (
-                  <div
-                    key={newsletter.id}
-                    className={`bg-white rounded-lg border-2 ${newsletter.color} shadow-sm overflow-hidden`}
-                  >
-                    {/* Header */}
-                    <div className="p-6 pb-4">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                            <Mail className="h-5 w-5 text-gray-600" />
-                          </div>
-                          <div>
-                            <h3 className="font-medium text-gray-900">{newsletter.source}</h3>
-                            <div className="flex items-center space-x-2 text-sm text-gray-500">
-                              <span>{newsletter.timeAgo}</span>
-                              <span>•</span>
-                              <span>{newsletter.readTime}</span>
+              {loading && (
+                <div className="text-center py-8 text-gray-500">Loading newsletters...</div>
+              )}
+              {error && (
+                <div className="text-center py-8 text-red-500">{error}</div>
+              )}
+              {!loading && !error && feedData && (
+                <div className="space-y-6">
+                  {feedData.feed.map((newsletter: NewsletterItem, idx: number) => (
+                    <div
+                      key={idx}
+                      className={`bg-white rounded-lg border-2 bg-blue-50 border-blue-200 shadow-sm overflow-hidden`}
+                    >
+                      {/* Header */}
+                      <div className="p-6 pb-4">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                              <Mail className="h-5 w-5 text-gray-600" />
+                            </div>
+                            <div>
+                              <h3 className="font-medium text-gray-900">{newsletter.source}</h3>
+                              <div className="flex items-center space-x-2 text-sm text-gray-500">
+                                <span>{newsletter.time_published}</span>
+                                <span>•</span>
+                                <span>{newsletter.read_time_minutes} min read</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <button className="text-gray-400 hover:text-gray-600">
-                          <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                          </svg>
-                        </button>
-                      </div>
-                      
-                      <h2 className="text-xl font-serif text-gray-900 mb-3 leading-tight">
-                        {newsletter.title}
-                      </h2>
-                      
-                      <p className="text-gray-600 leading-relaxed mb-4">
-                        {newsletter.summary}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {newsletter.tags.map((tag: string, index: number) => (
-                          <span
-                            key={index}
-                            className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      
-                      <button className="flex items-center space-x-2 text-amber-600 hover:text-amber-700 font-medium transition-colors">
-                        <span>Read full newsletter</span>
-                        <ExternalLink className="h-4 w-4" />
-                      </button>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-6">
-                          <button
-                            onClick={() => toggleLike(newsletter.id)}
-                            className={`flex items-center space-x-2 ${
-                              newsletter.isLiked 
-                                ? 'text-red-500' 
-                                : 'text-gray-500 hover:text-red-500'
-                            } transition-colors`}
-                          >
-                            <Heart className={`h-5 w-5 ${newsletter.isLiked ? 'fill-current' : ''}`} />
-                            <span className="text-sm">Like</span>
-                          </button>
-                          
-                          <button
-                            onClick={() => shareNewsletter(newsletter.id)}
-                            className="flex items-center space-x-2 text-gray-500 hover:text-gray-700 transition-colors"
-                          >
-                            <Share className="h-5 w-5" />
-                            <span className="text-sm">Share</span>
+                          <button className="text-gray-400 hover:text-gray-600">
+                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                            </svg>
                           </button>
                         </div>
                         
-                        <button
-                          onClick={() => toggleSave(newsletter.id)}
-                          className={`flex items-center space-x-2 ${
-                            newsletter.isSaved 
-                              ? 'text-amber-600' 
-                              : 'text-gray-500 hover:text-amber-600'
-                          } transition-colors`}
+                        <h2 className="text-xl font-serif text-gray-900 mb-3 leading-tight">
+                          {newsletter.title}
+                        </h2>
+                        
+                        <p className="text-gray-600 font-serif leading-relaxed mb-4">
+                          {newsletter.summary}
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {newsletter.tags.map((tag: string, index: number) => (
+                            <span
+                              key={index}
+                              className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        
+                        <a
+                          href={newsletter.actions.read_full_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center space-x-2 text-amber-600 hover:text-amber-700 font-medium transition-colors"
                         >
-                          <Bookmark className={`h-5 w-5 ${newsletter.isSaved ? 'fill-current' : ''}`} />
-                          <span className="text-sm">Save</span>
-                        </button>
+                          <span>Read full newsletter</span>
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-6">
+                            <button
+                              onClick={() => toggleLike(idx)}
+                              className={`flex items-center space-x-2 ${
+                                newsletter.actions.liked 
+                                  ? 'text-red-500' 
+                                  : 'text-gray-500 hover:text-red-500'
+                              } transition-colors`}
+                            >
+                              <Heart className={`h-5 w-5 ${newsletter.actions.liked ? 'fill-current' : ''}`} />
+                              <span className="text-sm">Like</span>
+                            </button>
+                            
+                            <button
+                              onClick={() => shareNewsletter(idx)}
+                              className="flex items-center space-x-2 text-gray-500 hover:text-gray-700 transition-colors"
+                            >
+                              <Share className="h-5 w-5" />
+                              <span className="text-sm">Share</span>
+                            </button>
+                          </div>
+                          
+                          <button
+                            onClick={() => toggleSave(idx)}
+                            className={`flex items-center space-x-2 ${
+                              newsletter.actions.saved 
+                                ? 'text-amber-600' 
+                                : 'text-gray-500 hover:text-amber-600'
+                            } transition-colors`}
+                          >
+                            <Bookmark className={`h-5 w-5 ${newsletter.actions.saved ? 'fill-current' : ''}`} />
+                            <span className="text-sm">Save</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-              
+                  ))}
+                </div>
+              )}
               {/* Load More */}
               <div className="text-center py-8">
                 <button className="bg-white text-gray-700 px-6 py-3 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors">
