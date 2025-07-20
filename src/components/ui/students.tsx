@@ -14,7 +14,7 @@ export default function StudentAnnouncement() {
         <div className="flex items-center gap-1">
           <GraduationCap className="h-5 w-5 text-white" />
           <span className="text-sm font-medium">
-            Students get Pro for <span className="font-serif text-white">free</span> with educational email
+            Students get Business Class for <span className="font-serif text-white">free</span> with educational email to fuel their ambitions
           </span>
           <button className="ml-2 text-sm text-gray-300 hover:text-white transition-colors flex items-center gap-1">
             Claim Student Access

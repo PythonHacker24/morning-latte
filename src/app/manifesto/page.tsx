@@ -14,24 +14,25 @@ export default function ManifestoPage() {
         <Navbar /> 
 
       {/* Hero Section with Gradient Overlay */}
-      <section className="relative h-screen flex items-center justify-center">
+      <section className="relative h-[60vh] flex items-center justify-center">
         {/* Hero Image Centered */}
          {/* Placeholder for Hero Image */}
          <div className="absolute inset-0 bg-gradient-to-r from-black to-black">
-            {/* <Image src='/cropped-wolf.png' width={4000} height={4000} alt='hero'/> */}
-          <div className="absolute inset-0 bg-black opacity-40"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-60"></div>
+            <Image src='/typewriter.jpg' width={4000} height={4000} alt='hero' className="object-cover w-full h-full"/>
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black opacity-50"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-60"></div>
         </div>
 
         {/* Hero Text */}
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-7xl font-serif mb-8 leading-tight">
+          <h1 className="text-6xl md:text-5xl font-serif mb-6 leading-tight">
             The Morning Latte Manifesto
           </h1>
-          <p className="text-xl md:text-2xl font-serif mb-6 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl font-serif mb-4 max-w-2xl mx-auto leading-relaxed">
             We are busy professionals who love to be updated with content written by the best writers
           </p>
-          <div className="text-lg md:text-xl text-gray-300 font-serif italic">
+          <div className="text-base md:text-lg text-gray-200 font-serif italic">
             &quot;The best investment is in yourself&quot; — Warren Buffett
           </div>
         </div>

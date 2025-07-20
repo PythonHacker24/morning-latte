@@ -6,9 +6,16 @@ import { Check, ArrowRight, Zap, Clock, Star } from 'lucide-react';
 import Navbar from '@/components/ui/navbar';
 import StudentAnnouncement from './students';
 import Footer from './footer';
+import { useRouter } from 'next/navigation';
 
 export default function Pricing() {
-    const [isAnnual, setIsAnnual] = useState(true);
+  const [isAnnual, setIsAnnual] = useState(true);
+
+  const router = useRouter();
+
+  const Onboard = () => {
+      router.push('/onboard');
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
@@ -63,7 +70,7 @@ export default function Pricing() {
                   <span className="text-4xl font-serif text-gray-900">$0</span>
                   <span className="text-gray-600 ml-2">forever</span>
                 </div>
-                <button className="w-full bg-gray-100 text-gray-900 px-6 py-3 rounded-md hover:bg-gray-200 transition-colors">
+                <button className="w-full bg-gray-100 text-gray-900 px-6 py-3 rounded-md hover:bg-gray-200 transition-colors" onClick={Onboard}>
                   Get Started Free
                 </button>
               </div>
@@ -101,8 +108,8 @@ export default function Pricing() {
               </div>
               
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-serif text-gray-900 mb-2">Pro</h3>
-                <p className="text-gray-600 mb-6">Essential for busy professionals</p>
+                <h3 className="text-2xl font-serif text-gray-900 mb-2">Business Class</h3>
+                <p className="text-gray-600 mb-6">For professionals with taste of reading</p>
                 <div className="mb-6">
                   {isAnnual ? (
                     <div>
@@ -119,7 +126,7 @@ export default function Pricing() {
                     </div>
                   )}
                 </div>
-                <button className="w-full bg-gray-900 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition-colors flex items-center justify-center">
+                <button className="w-full bg-gray-900 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition-colors flex items-center justify-center" onClick={Onboard}>
                   Start 14 Days Free Trial
                   <ArrowRight className="h-5 w-5 ml-2" />
                 </button>

@@ -5,8 +5,15 @@ import { Mail, Clock, ArrowRight, CheckCircle } from 'lucide-react';
 import Navbar from './navbar';
 import Footer from './footer';
 import NewsletterDemo from './newsletterdemo';
+import { useRouter } from 'next/navigation';
 
 export default function MorningLatteLanding() {
+
+    const router = useRouter();
+
+    const Onboard = () => {
+        router.push('/onboard');
+    };
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
