@@ -186,7 +186,7 @@ function DiscoverPage() {
     author: 'Steven Bartlett',
     description: 'Insights from conversations with the world\'s most successful people. Business, psychology, and life lessons from a bestselling author and entrepreneur.',
     subscribers: '450K',
-    backgroundImage: 'steven_bartlett.jpg',
+    backgroundImage: 'steven.png',
     backgroundFit: 'cover'
   };
 
@@ -213,7 +213,7 @@ function DiscoverPage() {
               }}
             >
               {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/10 to-transparent"></div>
               
               {/* Content */}
               <div className="relative h-full flex flex-col justify-end p-8">

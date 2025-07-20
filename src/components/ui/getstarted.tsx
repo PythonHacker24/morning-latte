@@ -96,7 +96,7 @@ export default function GetStartedPage() {
                   className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg shadow text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
                 >
                   <span className='px-2'><TwitterIcon /></span>
-                  <span className='font-bold' >Continue with X (formerly Twitter)</span>
+                  <span className='font-bold' >Continue with Twitter</span>
                 </button>
 
                 {/* Divider */}

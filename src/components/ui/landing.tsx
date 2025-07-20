@@ -5,15 +5,8 @@ import { Mail, Clock, ArrowRight, CheckCircle } from 'lucide-react';
 import Navbar from './navbar';
 import Footer from './footer';
 import NewsletterDemo from './newsletterdemo';
-import { useRouter } from 'next/navigation';
 
 export default function MorningLatteLanding() {
-
-    const router = useRouter();
-
-    const Onboard = () => {
-        router.push('/onboard');
-    };
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
@@ -66,7 +59,7 @@ export default function MorningLatteLanding() {
             <div className="text-center p-8 bg-white rounded-lg shadow-sm">
               <Clock className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-xl font-serif mb-3">Time Drain</h3>
-              <p className="text-gray-600">Reading full newsletters takes 3-5 minutes each. Who has that time?</p>
+              <p className="text-gray-600">Reading full newsletters takes more than 10 minutes each. Who has that time?</p>
             </div>
             <div className="text-center p-8 bg-white rounded-lg shadow-sm">
               <CheckCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
