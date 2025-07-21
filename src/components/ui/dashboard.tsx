@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Home, Compass, User, ExternalLink, Mail, Heart, Bookmark, Share, Twitter, Linkedin, Users, Sun, Bell, Globe, Palette, Coffee, Clock, Zap, Shield, Eye, HeadphonesIcon } from 'lucide-react';
+import { Home, Compass, User, Mail, Twitter, Linkedin, Users, Sun, Bell, Globe, Palette, Coffee, Clock, Zap, Shield, Eye, HeadphonesIcon } from 'lucide-react';
 import Image from 'next/image';
 import ErrorMessage from './error';
 import NewsletterComponent from './compilednewsletter';
@@ -83,9 +83,11 @@ function DiscoverPage() {
     }`}>
       <div className={`p-${size === "large" ? "6" : "4"}`}>
         <div className="flex items-start space-x-4">
-          <img
+          <Image
             src={writer.avatar}
             alt={writer.name}
+            width={size === "large" ? 64 : 48}
+            height={size === "large" ? 64 : 48}
             className={`${size === "large" ? "w-16 h-16" : "w-12 h-12"} rounded-full object-cover`}
           />
           <div className="flex-1 min-w-0">
@@ -346,9 +348,11 @@ function Preferences({ profileImageUrl }: { profileImageUrl?: string }) {
         {/* Profile Header */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8 flex flex-col items-center">
           <div className="relative mb-4">
-            <img
+            <Image
               src={profileImageUrl || '/logo.png'}
               alt="Profile Photo"
+              width={80}
+              height={80}
               className="w-20 h-20 rounded-full object-cover border-4 border-amber-100"
             />
             <button className="absolute bottom-0 right-0 bg-amber-600 text-white rounded-full p-1 hover:bg-amber-700 transition-colors border-2 border-white">
@@ -581,8 +585,10 @@ interface FeedResponse {
 export default function NewsletterFeed() {
   const [activeTab, setActiveTab] = useState('home');
   const [feedData, setFeedData] = useState<FeedResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
+  // const [error, setError] = useState<string | null>(null);
+  const [, setError] = useState<string | null>(null);
 
   // --- LIFTED FEATURED WRITER STATE ---
   const [featuredWriter, setFeaturedWriter] = useState<null | {
@@ -593,8 +599,10 @@ export default function NewsletterFeed() {
     image_url: string;
     button_text: string;
   }>(null);
-  const [featuredLoading, setFeaturedLoading] = useState(true);
-  const [featuredError, setFeaturedError] = useState<string | null>(null);
+  // const [featuredLoading, setFeaturedLoading] = useState(true);
+  const [, setFeaturedLoading] = useState(true);
+  // const [featuredError, setFeaturedError] = useState<string | null>(null);
+  const [, setFeaturedError] = useState<string | null>(null);
 
   React.useEffect(() => {
     setFeaturedLoading(true);
@@ -635,20 +643,20 @@ export default function NewsletterFeed() {
       });
   }, []);
 
-  const toggleLike = (id: number) => {
-    // Toggle like functionality
-    console.log(`Toggle like for newsletter ${id}`);
-  };
+  // const toggleLike = (id: number) => {
+  //   // Toggle like functionality
+  //   console.log(`Toggle like for newsletter ${id}`);
+  // };
 
-  const toggleSave = (id: number) => {
-    // Toggle save functionality
-    console.log(`Toggle save for newsletter ${id}`);
-  };
+  // const toggleSave = (id: number) => {
+  //   // Toggle save functionality
+  //   console.log(`Toggle save for newsletter ${id}`);
+  // };
 
-  const shareNewsletter = (id: number) => {
-    // Share functionality
-    console.log(`Share newsletter ${id}`);
-  };
+  // const shareNewsletter = (id: number) => {
+  //   // Share functionality
+  //   console.log(`Share newsletter ${id}`);
+  // };
 
   const sidebarItems = [
     { id: 'home', icon: Home, label: 'Home', active: true },

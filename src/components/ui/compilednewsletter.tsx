@@ -3,9 +3,7 @@ import { Mail, ExternalLink, Heart, Share, Bookmark, TrendingUp, Lightbulb, BarC
 
 const NewsletterComponent = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
-  
-  // Mock data structure matching your new format
-  const mockFeedData = {
+  const [feedData, setFeedData] = useState({
     feed: [
       {
         source: "Tech Daily",
@@ -36,7 +34,7 @@ const NewsletterComponent = () => {
         }
       }
     ]
-  };
+  });
 
   const toggleSection = (newsletterIdx: number, section: string) => {
     const key = `${newsletterIdx}-${section}`;
@@ -47,15 +45,45 @@ const NewsletterComponent = () => {
   };
 
   const toggleLike = (idx: number) => {
-    // Handle like toggle
+    setFeedData(prevData => {
+      const newFeed = [...prevData.feed];
+      newFeed[idx] = {
+        ...newFeed[idx],
+        actions: {
+          ...newFeed[idx].actions,
+          liked: !newFeed[idx].actions.liked
+        }
+      };
+      return { ...prevData, feed: newFeed };
+    });
   };
 
   const toggleSave = (idx: number) => {
-    // Handle save toggle
+    setFeedData(prevData => {
+      const newFeed = [...prevData.feed];
+      newFeed[idx] = {
+        ...newFeed[idx],
+        actions: {
+          ...newFeed[idx].actions,
+          saved: !newFeed[idx].actions.saved
+        }
+      };
+      return { ...prevData, feed: newFeed };
+    });
   };
 
   const shareNewsletter = (idx: number) => {
-    // Handle share
+    const newsletter = feedData.feed[idx];
+    if (navigator.share) {
+      navigator.share({
+        title: newsletter.title,
+        text: newsletter.summary,
+        url: newsletter.actions.read_full_url
+      }).catch((error) => console.log('Error sharing:', error));
+    } else {
+      // Fallback for browsers that don't support the Web Share API
+      window.open(newsletter.actions.read_full_url, '_blank');
+    }
   };
 
   type SectionToggleProps = {
@@ -119,10 +147,10 @@ const NewsletterComponent = () => {
   return (
     <div className="max-w-2xl mx-auto px-6 py-6">
       <div className="space-y-6">
-        {mockFeedData.feed.map((newsletter, idx) => (
+        {feedData.feed.map((newsletter, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-lg border-2 bg-blue-50 border-blue-200 shadow-sm overflow-hidden"
+            className="bg-white rounded-lg border-2 border-blue-200 shadow-sm overflow-hidden"
           >
             {/* Header */}
             <div className="p-6 pb-0">
