@@ -5,6 +5,7 @@ import { Mail, Clock, ArrowRight, CheckCircle } from 'lucide-react';
 import Navbar from './navbar';
 import Footer from './footer';
 import NewsletterDemo from './newsletterdemo';
+import NewsletterPodcastDemo from './nwslpodcast';
 
 export default function MorningLatteLanding() {
 
@@ -15,14 +16,14 @@ export default function MorningLatteLanding() {
 
       {/* Hero Section */}
       <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-35">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-serif text-gray-900 mb-6 leading-tight">
-              Scroll Newsletters,<br />
-              <span className="text-gray-600">like Instagram Reels</span>
+              Absorb Newsletters,<br />
+              <span className="text-gray-600">by Listening and Scrolling</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Transform your inbox chaos into a clean, summarized reading experience. 
+              Transform your inbox chaos into a clean, summarized listening and reading experience. 
               Get the essence of every newsletter in seconds, not minutes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -43,7 +44,7 @@ export default function MorningLatteLanding() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-serif text-gray-900 mb-6">
-              Drowning in Newsletters?
+              Drowning in Information Overload of Newsletters?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 An average person subscribes to 15+ newsletters of their favourite creators and experts. Most sit unread.
@@ -100,7 +101,7 @@ export default function MorningLatteLanding() {
                   2
                 </div>
                 <div>
-                  <h3 className="text-xl font-serif mb-2">Intelligent Summaries</h3>
+                  <h3 className="text-xl font-serif mb-2">Intelligent Summaries and Audio Streaming</h3>
                   <p className="text-gray-600">Extract key insights, trends, and actionable points automatically</p>
                 </div>
               </div>
@@ -110,8 +111,8 @@ export default function MorningLatteLanding() {
                   3
                 </div>
                 <div>
-                  <h3 className="text-xl font-serif mb-2">Clean Reading Experience</h3>
-                  <p className="text-gray-600">Scroll through summaries in seconds, click to read full versions</p>
+                  <h3 className="text-xl font-serif mb-2">Clean Learning Experience</h3>
+                  <p className="text-gray-600">Listen to newsletters, scroll through summaries, click to read full versions</p>
                 </div>
               </div>
             </div>
@@ -139,10 +140,12 @@ export default function MorningLatteLanding() {
         </div>
       </section>
 
+      <NewsletterPodcastDemo />
+
       <NewsletterDemo />
 
       {/* Benefits Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-serif text-gray-900 mb-6">

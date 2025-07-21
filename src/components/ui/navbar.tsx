@@ -18,6 +18,10 @@ export default function Navbar() {
         router.push('/manifesto');
     };
 
+    const Writers = () => {
+      router.push('forwriters')
+    };
+
     const LandingPage = () => {
         router.push('/');
     };
@@ -35,6 +39,9 @@ export default function Navbar() {
             <div className="flex items-center space-x-8">
               <button className="text-gray-600 hover:text-gray-900 transition-colors" onClick={Pricing}>
                 Pricing
+              </button>
+              <button className="text-gray-600 hover:text-gray-900 transition-colors" onClick={Writers}>
+                Writers
               </button>
               <button className="text-gray-600 hover:text-gray-900 transition-colors" onClick={Manifesto}>
                 Manifesto

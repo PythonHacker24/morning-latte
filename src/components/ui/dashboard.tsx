@@ -1,75 +1,51 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Home, Compass, User, ExternalLink, Mail, Heart, Bookmark, Share, Twitter, Linkedin, Users, Sun, Bell, Globe, Palette, Coffee, Clock, Zap, Shield, Eye } from 'lucide-react';
+import { Home, Compass, User, ExternalLink, Mail, Heart, Bookmark, Share, Twitter, Linkedin, Users, Sun, Bell, Globe, Palette, Coffee, Clock, Zap, Shield, Eye, HeadphonesIcon } from 'lucide-react';
 import Image from 'next/image';
+import ErrorMessage from './error';
+import NewsletterComponent from './compilednewsletter';
 
 // Discover Page Component
 function DiscoverPage() {
   const [subscribing, setSubscribing] = useState<number | null>(null);
+  type TopPick = {
+    name: string;
+    title: string;
+    newsletter_name: string;
+    description: string;
+    subscribers: number | string;
+    image_url: string;
+    tags: string[];
+    socials: {
+      twitter?: string;
+      linkedin?: string;
+      website?: string;
+    };
+    button_text?: string;
+  };
 
-  const topPicks = [
-    {
-      id: 1,
-      name: "Sarah Chen",
-      title: "Tech Strategist & AI Expert",
-      newsletter: "The AI Weekly",
-      bio: "Former Google PM turned AI newsletter writer. Covers the latest in machine learning, startups, and tech policy.",
-      subscribers: "125K",
-      avatar: "https://warburgpincus.com/wp-content/uploads/2019/10/Sarah-Chen-web-1024x991.jpg",
-      tags: ["AI", "Technology", "Startups"],
-      social: {
-        twitter: "@sarahchen",
-        linkedin: "sarah-chen-ai",
-        website: "aiweekly.com"
-      }
-    },
-    {
-      id: 2,
-      name: "Marcus Rodriguez",
-      title: "Finance & Markets Analyst",
-      newsletter: "Market Pulse",
-      bio: "15 years on Wall Street. Now breaking down complex market trends for everyday investors.",
-      subscribers: "89K",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      tags: ["Finance", "Markets", "Investment"],
-      social: {
-        twitter: "@marcusmarkets",
-        linkedin: "marcus-rodriguez-finance",
-        website: "marketpulse.io"
-      }
-    },
-    {
-      id: 3,
-      name: "Dr. Emma Watson",
-      title: "Climate Scientist",
-      newsletter: "Climate Clarity",
-      bio: "Making climate science accessible. Weekly insights on sustainability, policy, and green technology.",
-      subscribers: "67K",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-      tags: ["Climate", "Science", "Environment"],
-      social: {
-        twitter: "@dremmaclimate",
-        linkedin: "dr-emma-watson-climate",
-        website: "climateclarity.org"
-      }
-    },
-    {
-      id: 4,
-      name: "Alex Kim",
-      title: "Product Design Leader",
-      newsletter: "Design Systems",
-      bio: "Design director at top tech companies. Sharing insights on UX, design systems, and product thinking.",
-      subscribers: "45K",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-      tags: ["Design", "UX", "Product"],
-      social: {
-        twitter: "@alexkimdesign",
-        linkedin: "alex-kim-design",
-        website: "designsystems.guide"
-      }
-    }
-  ];
+  const [topPicks, setTopPicks] = useState<TopPick[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    setLoading(true);
+    setError(null);
+    fetch('http://localhost:4444/user/feed/discover/top-picks', { credentials: 'include' })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Failed to fetch top picks');
+        return res.json();
+      })
+      .then((data) => {
+        setTopPicks(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message || 'Unknown error');
+        setLoading(false);
+      });
+  }, []);
 
   const handleSubscribe = async (writerId: number) => {
     setSubscribing(writerId);
@@ -93,6 +69,7 @@ function DiscoverPage() {
       linkedin?: string;
       website?: string;
     };
+    buttonText?: string;
   };
 
   type WriterCardProps = {
@@ -149,17 +126,17 @@ function DiscoverPage() {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             {writer.social.twitter && (
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition-colors">
+              <a href={writer.social.twitter} className="text-gray-400 hover:text-blue-500 transition-colors" target="_blank" rel="noopener noreferrer">
                 <Twitter className="h-4 w-4" />
               </a>
             )}
             {writer.social.linkedin && (
-              <a href="#" className="text-gray-400 hover:text-blue-600 transition-colors">
+              <a href={writer.social.linkedin} className="text-gray-400 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="h-4 w-4" />
               </a>
             )}
             {writer.social.website && (
-              <a href="#" className="text-gray-400 hover:text-gray-600 transition-colors">
+              <a href={writer.social.website} className="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener noreferrer">
                 <Globe className="h-4 w-4" />
               </a>
             )}
@@ -174,21 +151,42 @@ function DiscoverPage() {
                 : 'bg-amber-600 text-white hover:bg-amber-700'
             }`}
           >
-            {subscribing === writer.id ? 'Joining...' : 'Join Newsletter'}
+            {subscribing === writer.id ? 'Joining...' : writer.buttonText || 'Join Newsletter'}
           </button>
         </div>
       </div>
     </div>
   );
 
-  const featuredWriter = {
-    name: 'The Diary of a CEO Newsletter',
-    author: 'Steven Bartlett',
-    description: 'Insights from conversations with the world\'s most successful people. Business, psychology, and life lessons from a bestselling author and entrepreneur.',
-    subscribers: '450K',
-    backgroundImage: 'steven.png',
-    backgroundFit: 'cover'
-  };
+  // Remove hardcoded featuredWriter and add state for featured writer
+  const [featuredWriter, setFeaturedWriter] = useState<null | {
+    title: string;
+    author: string;
+    description: string;
+    subscribers: number;
+    image_url: string;
+    button_text: string;
+  }>(null);
+  const [featuredLoading, setFeaturedLoading] = useState(true);
+  const [featuredError, setFeaturedError] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    setFeaturedLoading(true);
+    setFeaturedError(null);
+    fetch('http://localhost:4444/user/feed/discover/featured', { credentials: 'include' })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Failed to fetch featured writer');
+        return res.json();
+      })
+      .then((data) => {
+        setFeaturedWriter(data);
+        setFeaturedLoading(false);
+      })
+      .catch((err) => {
+        setFeaturedError(err.message || 'Unknown error');
+        setFeaturedLoading(false);
+      });
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -203,51 +201,78 @@ function DiscoverPage() {
 
         {/* Featured Section */}
         <section className="max-w-6xl mx-auto px-6 py-8">
+          {featuredLoading && (
+            <div className="text-center py-16 text-gray-500">Loading featured writer...</div>
+          )}
+          {featuredError && (
+            <ErrorMessage message={featuredError} size="sm" showRetry={false} />
+          )}
+          {!featuredLoading && !featuredError && featuredWriter && (
             <div 
               className="relative h-96 md:h-[28rem] lg:h-[26rem] rounded-2xl overflow-hidden shadow-lg"
               style={{
-                background: `url(${featuredWriter.backgroundImage})`,
-                backgroundSize: featuredWriter.backgroundFit,
+                background: featuredWriter.image_url ? `url(${featuredWriter.image_url})` : undefined,
+                backgroundSize: 'cover',
                 backgroundPosition: 'center center',
                 backgroundRepeat: 'no-repeat'
               }}
             >
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/10 to-transparent"></div>
-              
               {/* Content */}
               <div className="relative h-full flex flex-col justify-end p-8">
                 <div className="mb-4">
                   <h2 className="text-white font-serif text-xl mb-2">Featured this Week</h2>
-                  <h3 className="text-white font-serif text-3xl mb-3">{featuredWriter.name}</h3>
+                  <h3 className="text-white font-serif text-3xl mb-3">{featuredWriter.title}</h3>
                   <p className="text-white/90 font-serif text-lg mb-2">by {featuredWriter.author}</p>
                   <p className="text-white/80 font-serif text-base max-w-md mb-4">{featuredWriter.description}</p>
-                  <p className="text-gray-50 font-serif text-sm">{featuredWriter.subscribers} subscribers</p>
+                  <p className="text-gray-50 font-serif text-sm">{featuredWriter.subscribers.toLocaleString()} subscribers</p>
                 </div>
-                
                 <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-8 rounded-full transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 w-fit">
-                  Join Newsletter
+                  {featuredWriter.button_text || 'Join Newsletter'}
                 </button>
               </div>
             </div>
-          </section>
+          )}
+        </section>
 
       <div className="max-w-6xl mx-auto px-6 py-8">
         {/* Top Picks Section */}
         <div className="mb-12">
           <h2 className="text-xl font-serif text-gray-900 mb-6">Top Picks for You</h2>
-          <div className="flex space-x-6 overflow-x-auto pb-4">
-            {topPicks.map((writer) => (
-              <WriterCard key={writer.id} writer={writer} size="large" />
-            ))}
-          </div>
+          {loading && <div className="text-center py-8 text-gray-500">Loading top picks...</div>}
+          {error && <ErrorMessage message={error} size="sm" showRetry={false} />}
+          {!loading && !error && (
+            <div className="flex space-x-6 overflow-x-auto pb-4">
+              {topPicks.map((writer, idx) => {
+                // Map API response to WriterCard props
+                const mappedWriter: Writer = {
+                  id: idx + 1, // No id in API, so use index
+                  name: writer.name,
+                  title: writer.title,
+                  newsletter: writer.newsletter_name,
+                  bio: writer.description,
+                  subscribers: typeof writer.subscribers === 'number' ? writer.subscribers.toLocaleString() : writer.subscribers,
+                  avatar: writer.image_url,
+                  tags: writer.tags,
+                  social: {
+                    twitter: writer.socials?.twitter,
+                    linkedin: writer.socials?.linkedin,
+                    website: writer.socials?.website,
+                  },
+                  buttonText: writer.button_text,
+                };
+                return <WriterCard key={mappedWriter.id} writer={mappedWriter} size="large" />;
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-function Preferences() {
+function Preferences({ profileImageUrl }: { profileImageUrl?: string }) {
     const [darkMode, setDarkMode] = useState(false);
     const [notifications, setNotifications] = useState(true);
     const [autoUpdate, setAutoUpdate] = useState(true);
@@ -322,7 +347,7 @@ function Preferences() {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8 flex flex-col items-center">
           <div className="relative mb-4">
             <img
-              src="/api/placeholder/80/80"
+              src={profileImageUrl || '/logo.png'}
               alt="Profile Photo"
               className="w-20 h-20 rounded-full object-cover border-4 border-amber-100"
             />
@@ -559,6 +584,36 @@ export default function NewsletterFeed() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // --- LIFTED FEATURED WRITER STATE ---
+  const [featuredWriter, setFeaturedWriter] = useState<null | {
+    title: string;
+    author: string;
+    description: string;
+    subscribers: number;
+    image_url: string;
+    button_text: string;
+  }>(null);
+  const [featuredLoading, setFeaturedLoading] = useState(true);
+  const [featuredError, setFeaturedError] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    setFeaturedLoading(true);
+    setFeaturedError(null);
+    fetch('http://localhost:4444/user/feed/discover/featured', { credentials: 'include' })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Failed to fetch featured writer');
+        return res.json();
+      })
+      .then((data) => {
+        setFeaturedWriter(data);
+        setFeaturedLoading(false);
+      })
+      .catch((err) => {
+        setFeaturedError(err.message || 'Unknown error');
+        setFeaturedLoading(false);
+      });
+  }, []);
+
   React.useEffect(() => {
     setLoading(true);
     setError(null);
@@ -599,6 +654,7 @@ export default function NewsletterFeed() {
     { id: 'home', icon: Home, label: 'Home', active: true },
     // { id: 'search', icon: Search, label: 'Search', active: false },
     { id: 'discover', icon: Compass, label: 'Discover', active: false },
+    { id: 'listen', icon: HeadphonesIcon, label: 'Listen', active: false },
     { id: 'profile', icon: User, label: 'Profile', active: false }
   ];
 
@@ -665,127 +721,12 @@ export default function NewsletterFeed() {
             </div>
 
             {/* Feed */}
-            <div className="max-w-2xl mx-auto px-6 py-6">
-              {loading && (
-                <div className="text-center py-8 text-gray-500">Loading newsletters...</div>
-              )}
-              {error && (
-                <div className="text-center py-8 text-red-500">{error}</div>
-              )}
-              {!loading && !error && feedData && (
-                <div className="space-y-6">
-                  {feedData.feed.map((newsletter: NewsletterItem, idx: number) => (
-                    <div
-                      key={idx}
-                      className={`bg-white rounded-lg border-2 bg-blue-50 border-blue-200 shadow-sm overflow-hidden`}
-                    >
-                      {/* Header */}
-                      <div className="p-6 pb-4">
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center space-x-3">
-                            <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                              <Mail className="h-5 w-5 text-gray-600" />
-                            </div>
-                            <div>
-                              <h3 className="font-medium text-gray-900">{newsletter.source}</h3>
-                              <div className="flex items-center space-x-2 text-sm text-gray-500">
-                                <span>{newsletter.time_published}</span>
-                                <span>•</span>
-                                <span>{newsletter.read_time_minutes} min read</span>
-                              </div>
-                            </div>
-                          </div>
-                          <button className="text-gray-400 hover:text-gray-600">
-                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                            </svg>
-                          </button>
-                        </div>
-                        
-                        <h2 className="text-xl font-serif text-gray-900 mb-3 leading-tight">
-                          {newsletter.title}
-                        </h2>
-                        
-                        <p className="text-gray-600 font-serif leading-relaxed mb-4">
-                          {newsletter.summary}
-                        </p>
-                        
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {newsletter.tags.map((tag: string, index: number) => (
-                            <span
-                              key={index}
-                              className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        
-                        <a
-                          href={newsletter.actions.read_full_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center space-x-2 text-amber-600 hover:text-amber-700 font-medium transition-colors"
-                        >
-                          <span>Read full newsletter</span>
-                          <ExternalLink className="h-4 w-4" />
-                        </a>
-                      </div>
-
-                      {/* Actions */}
-                      <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-6">
-                            <button
-                              onClick={() => toggleLike(idx)}
-                              className={`flex items-center space-x-2 ${
-                                newsletter.actions.liked 
-                                  ? 'text-red-500' 
-                                  : 'text-gray-500 hover:text-red-500'
-                              } transition-colors`}
-                            >
-                              <Heart className={`h-5 w-5 ${newsletter.actions.liked ? 'fill-current' : ''}`} />
-                              <span className="text-sm">Like</span>
-                            </button>
-                            
-                            <button
-                              onClick={() => shareNewsletter(idx)}
-                              className="flex items-center space-x-2 text-gray-500 hover:text-gray-700 transition-colors"
-                            >
-                              <Share className="h-5 w-5" />
-                              <span className="text-sm">Share</span>
-                            </button>
-                          </div>
-                          
-                          <button
-                            onClick={() => toggleSave(idx)}
-                            className={`flex items-center space-x-2 ${
-                              newsletter.actions.saved 
-                                ? 'text-amber-600' 
-                                : 'text-gray-500 hover:text-amber-600'
-                            } transition-colors`}
-                          >
-                            <Bookmark className={`h-5 w-5 ${newsletter.actions.saved ? 'fill-current' : ''}`} />
-                            <span className="text-sm">Save</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {/* Load More */}
-              <div className="text-center py-8">
-                <button className="bg-white text-gray-700 px-6 py-3 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors">
-                  Load more newsletters
-                </button>
-              </div>
-            </div>
+             <NewsletterComponent />
           </>
         )}
 
         {activeTab === 'discover' && <DiscoverPage />}
-        {activeTab === 'profile' && <Preferences />}
+        {activeTab === 'profile' && <Preferences profileImageUrl={featuredWriter?.image_url} />}
       </div>
     </div>
   );
