@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef, MutableRefObject } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Play, Pause, Clock, Mic, FileText, Headphones } from 'lucide-react';
 
 const NewsletterPodcastDemo = () => {
