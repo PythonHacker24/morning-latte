@@ -152,10 +152,6 @@ const NewsletterPodcastDemo = () => {
             </div>
             <h3 className="text-lg font-serif text-white">Tech Weekly Podcast</h3>
           </div>
-          <div className="flex items-center text-xs text-amber-400 bg-amber-900 px-2 py-1 rounded-full">
-            <Headphones className="w-3 h-3 mr-1" />
-            Ready to play
-          </div>
         </div>
       </div>
 
@@ -230,10 +226,10 @@ const NewsletterPodcastDemo = () => {
     <div className="py-14 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-5xl font-serif text-gray-900 mb-4 py-5">
+          <h2 className="text-5xl font-serif text-gray-900 mb-3">
             Introducing Newsletter to Podcast Streaming
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-3xs text-gray-900/60 max-w-2xl mx-auto text-nowrap">
             Watch how we transform lengthy newsletters into engaging audio content you can listen to anywhere.
           </p>
         </div>

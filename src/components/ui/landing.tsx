@@ -18,11 +18,11 @@ export default function MorningLatteLanding() {
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-35">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-serif text-gray-900 mb-6 leading-tight">
-              Absorb Newsletters,<br />
+            <h1 className="text-6xl md:text-6xl font-serif text-gray-900 mb-3 leading-tight">
+              Consume Newsletters,<br />
               <span className="text-gray-600">by Listening and Scrolling</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-900/60 mb-8 max-w-2xl mx-auto leading-relaxed">
               Transform your inbox chaos into a clean, summarized listening and reading experience. 
               Get the essence of every newsletter in seconds, not minutes.
             </p>
@@ -31,8 +31,8 @@ export default function MorningLatteLanding() {
                 Start Your Morning Ritual
                 <ArrowRight className="h-5 w-5" />
               </button>
-              <button className="text-gray-600 hover:text-gray-900 transition-colors text-lg">
-                Watch Demo
+              <button className="bg-gray-100 text-gray-900 px-8 py-3 rounded-md text-lg hover:bg-gray-200 transition-colors flex items-center gap-2">
+                <span className='px-14'>Watch Demo</span>
               </button>
             </div>
           </div>
@@ -43,29 +43,29 @@ export default function MorningLatteLanding() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-serif text-gray-900 mb-6">
+            <h2 className="text-5xl font-serif text-gray-900 mb-4">
               Drowning in Information Overload of Newsletters?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                An average person subscribes to 15+ newsletters of their favourite creators and experts. Most sit unread.
+            <p className="text-3xs text-gray-900/60 max-w-3xl mx-auto">
+                An average person subscribes to 15+ newsletters of their favourite creators and experts. <span className='font-bold'>Most sit unread.</span>
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-8 bg-white rounded-lg shadow-sm">
               <Mail className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-serif mb-3">Inbox Overwhelm</h3>
-              <p className="text-gray-600">Hundreds of newsletters competing for your attention every morning</p>
+              <h3 className="text-xl font-serif mb-2">Inbox Overwhelm</h3>
+              <p className="text-gray-900/60">Hundreds of newsletters competing for your attention every morning</p>
             </div>
             <div className="text-center p-8 bg-white rounded-lg shadow-sm">
               <Clock className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-serif mb-3">Time Drain</h3>
-              <p className="text-gray-600">Reading full newsletters takes more than 10 minutes each. Who has that time?</p>
+              <h3 className="text-xl font-serif mb-2">Time Drain</h3>
+              <p className="text-gray-900/60">Reading full newsletters takes more than 10 minutes each. Who has that time?</p>
             </div>
             <div className="text-center p-8 bg-white rounded-lg shadow-sm">
               <CheckCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-serif mb-3">Lost Information</h3>
-              <p className="text-gray-600">Treasure of information from your favourite creators is lost in the chaos</p>
+              <h3 className="text-xl font-serif mb-2">Lost Information</h3>
+              <p className="text-gray-900/60">Treasure of information from your favourite creators is lost in the chaos</p>
             </div>
           </div>
         </div>
@@ -78,9 +78,9 @@ export default function MorningLatteLanding() {
             <h2 className="text-5xl font-serif text-gray-900 mb-6">
                   Be the Smartest Person in the Room
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Morning Latte connects to your Gmail, intelligently summarizes every newsletter, 
-              and serves you Reels in a beautiful, distraction-free feed.
+            <p className="text-3xs text-gray-900/60 max-w-3xl mx-auto">
+              Morning Latte connects to your inbox, intelligently summarizes every newsletter, 
+              and serves you podcasts and reels in a beautiful, distraction-free feed.
             </p>
           </div>
 
@@ -184,12 +184,14 @@ export default function MorningLatteLanding() {
             No more impulsive newsletter subscribing and ghosting. 
             Get started in under 2 minutes.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-3">
             <button className="bg-white text-gray-900 px-8 py-3 rounded-md text-lg hover:bg-gray-100 transition-colors flex items-center gap-2">
               Get Started Free
               <ArrowRight className="h-5 w-5" />
             </button>
-            <p className="text-gray-400 text-sm">No credit card required</p>
+          </div>
+          <div>
+          <p className="text-gray-400 text-xs">No credit card required</p>
           </div>
         </div>
       </section>

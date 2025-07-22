@@ -96,10 +96,10 @@ const NewsletterDemo = () => {
     <div className="py-14 bg-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-5xl font-serif text-gray-900 mb-4 py-5">
+          <h2 className="text-5xl font-serif text-gray-900 mb-3">
             Get Detailed Insights and Summaries on the Go
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-3xs text-gray-900/60 max-w-2xl mx-auto">
             Watch how Morning Latte transforms a lengthy AI newsletter into digestible, actionable insights
           </p>
         </div>
