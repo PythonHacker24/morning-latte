@@ -25,6 +25,29 @@ function DiscoverPage() {
     button_text?: string;
   };
 
+  // --- CACHE UTILS ---
+  const CACHE_EXPIRY_MS = 10 * 60 * 1000; // 10 minutes
+  function setCache(key: string, value: unknown) {
+    const data = { value, expiry: Date.now() + CACHE_EXPIRY_MS };
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+  function getCache(key: string): unknown {
+    const item = localStorage.getItem(key);
+    if (!item) return null;
+    try {
+      const data = JSON.parse(item);
+      if (data.expiry && data.expiry > Date.now()) {
+        return data.value;
+      } else {
+        localStorage.removeItem(key);
+        return null;
+      }
+    } catch {
+      localStorage.removeItem(key);
+      return null;
+    }
+  }
+
   const [topPicks, setTopPicks] = useState<TopPick[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -32,6 +55,13 @@ function DiscoverPage() {
   React.useEffect(() => {
     setLoading(true);
     setError(null);
+    const cacheKey = 'discover_top_picks';
+    const cached = getCache(cacheKey);
+    if (cached) {
+      setTopPicks(cached as TopPick[]);
+      setLoading(false);
+      return;
+    }
     fetch('http://localhost:4444/user/feed/discover/top-picks', { credentials: 'include' })
       .then(async (res) => {
         if (!res.ok) throw new Error('Failed to fetch top picks');
@@ -39,6 +69,7 @@ function DiscoverPage() {
       })
       .then((data) => {
         setTopPicks(data);
+        setCache(cacheKey, data);
         setLoading(false);
       })
       .catch((err) => {
@@ -175,6 +206,20 @@ function DiscoverPage() {
   React.useEffect(() => {
     setFeaturedLoading(true);
     setFeaturedError(null);
+    const cacheKey = 'discover_featured_writer';
+    const cached = getCache(cacheKey);
+    if (cached) {
+      setFeaturedWriter(cached as {
+        title: string;
+        author: string;
+        description: string;
+        subscribers: number;
+        image_url: string;
+        button_text: string;
+      });
+      setFeaturedLoading(false);
+      return;
+    }
     fetch('http://localhost:4444/user/feed/discover/featured', { credentials: 'include' })
       .then(async (res) => {
         if (!res.ok) throw new Error('Failed to fetch featured writer');
@@ -182,6 +227,7 @@ function DiscoverPage() {
       })
       .then((data) => {
         setFeaturedWriter(data);
+        setCache(cacheKey, data);
         setFeaturedLoading(false);
       })
       .catch((err) => {

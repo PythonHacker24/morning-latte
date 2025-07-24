@@ -43,7 +43,7 @@ export default function MorningLatteLanding() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-serif text-gray-900 mb-4">
+            <h2 className="text-4xl font-serif text-gray-900 mb-4">
               Drowning in Information Overload of Newsletters?
             </h2>
             <p className="text-3xs text-gray-900/60 max-w-3xl mx-auto">
@@ -75,7 +75,7 @@ export default function MorningLatteLanding() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-serif text-gray-900 mb-6">
+            <h2 className="text-4xl font-serif text-gray-900 mb-6">
                   Be the Smartest Person in the Room
             </h2>
             <p className="text-3xs text-gray-900/60 max-w-3xl mx-auto">
@@ -148,7 +148,7 @@ export default function MorningLatteLanding() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-serif text-gray-900 mb-6">
+            <h2 className="text-4xl font-serif text-gray-900 mb-6">
               Reclaim your Smart Morning Routine
             </h2>
             <span className='text-lg font-serif italic text-gray-500'>&quot;Not all readers are leaders, but all leaders are readers.&quot; - Harry S. Truman</span>

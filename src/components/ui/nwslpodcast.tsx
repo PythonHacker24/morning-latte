@@ -226,11 +226,11 @@ const NewsletterPodcastDemo = () => {
     <div className="py-14 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-5xl font-serif text-gray-900 mb-3">
+          <h2 className="text-4xl font-serif text-gray-900 mb-3">
             Introducing Newsletter to Podcast Streaming
           </h2>
-          <p className="text-3xs text-gray-900/60 max-w-2xl mx-auto text-nowrap">
-            Watch how we transform lengthy newsletters into engaging audio content you can listen to anywhere.
+          <p className="text-3xs text-gray-900/60 max-w-2xl mx-auto">
+            Watch how we transform newsletters into engaging podcasts you can listen to anywhere.
           </p>
         </div>
 

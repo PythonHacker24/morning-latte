@@ -33,7 +33,7 @@ export default function Navbar() {
             <button onClick={LandingPage}>
             <div className="flex items-center space-x-1">
               <Image src="/logo.png" width={40} height={40} alt="logo" />
-              <span className="text-2xl font-serif text-gray-900">Morning Latte</span>
+              <span className="text-3xl font-serif text-gray-900">Morning Latte</span>
             </div>
             </button>
             <div className="flex items-center space-x-8">
